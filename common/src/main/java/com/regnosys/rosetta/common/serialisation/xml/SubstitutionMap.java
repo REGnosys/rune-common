@@ -49,15 +49,9 @@ public class SubstitutionMap {
         private final String namespace;
 
         public XMLFullyQualifiedName(String name) {
-            Pattern p = Pattern.compile("^(.+)/(.+)$");
-            Matcher m = p.matcher(name);
-            if (m.matches()) {
-                this.namespace = m.group(1);
-                this.name = m.group(2);
-            } else {
-                this.namespace = null;
-                this.name = name;
-            }
+            Matcher namespaceAndLocalNameMatcher = getNamespaceAndLocalNameMatcher(name);
+            this.name = generateLocalName(name, namespaceAndLocalNameMatcher);
+            this.namespace = generateNamespace(namespaceAndLocalNameMatcher);
         }
 
         public XMLFullyQualifiedName(String name, String namespace) {
@@ -71,6 +65,25 @@ public class SubstitutionMap {
 
         public String getNamespace() {
             return namespace;
+        }
+
+        private static String generateNamespace(Matcher namespaceAndLocalNameMatcher) {
+            if (namespaceAndLocalNameMatcher.matches()) {
+                return namespaceAndLocalNameMatcher.group(1);
+            }
+            return null;
+        }
+
+        private static String generateLocalName(String name, Matcher namespaceAndLocalNameMatcher) {
+            if (namespaceAndLocalNameMatcher.matches()) {
+                return namespaceAndLocalNameMatcher.group(2);
+            }
+            return name;
+        }
+
+        private static Matcher getNamespaceAndLocalNameMatcher(String name) {
+            Pattern p = Pattern.compile("^(.+)/(.+)$");
+            return p.matcher(name);
         }
 
         @Override
