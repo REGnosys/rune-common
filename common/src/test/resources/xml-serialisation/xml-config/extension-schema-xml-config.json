@@ -36,6 +36,9 @@
     "xmlElementFullyQualifiedName" : "urn:my.schema/bear",
     "abstract" : false,
     "attributes" : {
+      "name" : {
+        "xmlRepresentation" : "IGNORED"
+      },
       "bearSequence" : {
         "xmlRepresentation" : "VIRTUAL"
       }
