@@ -53,7 +53,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsInAnyOrder;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class XmlSerialisationTest {
     private static final String XSD_SCHEMA = "/xml-serialisation/schema/extension-schema.xsd";
@@ -354,6 +356,17 @@ public class XmlSerialisationTest {
                 ).build();
 
         assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testClashingSequence() throws IOException {
+        String input = Resources.toString(Resources.getResource("xml-serialisation/input/clashing-sequence.xml"), StandardCharsets.UTF_8);
+
+        AnimalContainer animalContainer = xmlMapper.readValue(input, AnimalContainer.class);
+
+        assertInstanceOf(Bear.class, animalContainer.getAnimal());
+        Bear bear = (Bear) animalContainer.getAnimal();
+        assertThat(bear.getBearSequence().getName(), containsInAnyOrder("Grizzly", "Fluffy"));
     }
 
     @Test

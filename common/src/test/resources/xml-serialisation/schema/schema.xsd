@@ -108,6 +108,7 @@
     <xs:element name="salmon" type="Salmon" substitutionGroup="fish"/>
     <xs:element name="snake" type="Snake" substitutionGroup="animal"/>
     <xs:element name="camel" type="Camel" substitutionGroup="animal"/>
+    <xs:element name="bear" type="Bear" substitutionGroup="animal"/>
 
     <!-- Types: `Cow` and `Goat` extend from `Animal` -->
     <xs:complexType name="Animal">
@@ -149,6 +150,17 @@
     <xs:complexType name="Camel">
         <xs:complexContent>
             <xs:extension base="Animal"/>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="Bear">
+        <xs:complexContent>
+            <xs:extension base="Animal">
+                <xs:sequence>
+                    <xs:sequence minOccurs="0">
+                        <xs:element name="name" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:sequence>
+            </xs:extension>
         </xs:complexContent>
     </xs:complexType>
 

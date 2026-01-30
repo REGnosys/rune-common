@@ -25,6 +25,10 @@ type Snake extends Animal:
 
 type Camel extends Animal:
 
+type Bear extends Animal:
+
+    bearSequence BearSequence (0..1)
+
 type Document:
 
     attr Foo (1..1)
@@ -86,6 +90,10 @@ type WrappedAnimalContainer:
 type Animal:
 
     name string (0..1)
+
+type BearSequence:
+
+    name string (0..*)
 
 type Zoo:
 
