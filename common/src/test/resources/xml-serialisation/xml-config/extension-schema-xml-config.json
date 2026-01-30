@@ -122,6 +122,9 @@
     "xmlElementFullyQualifiedName" : "urn:my.schema/snake",
     "abstract" : false,
     "attributes" : {
+      "expirationDate" : {
+        "xmlRepresentation" : "IGNORED"
+      },
       "snakeModel" : {
         "xmlRepresentation" : "VIRTUAL"
       }
