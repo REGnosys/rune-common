@@ -50,10 +50,10 @@ import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -366,7 +366,7 @@ public class XmlSerialisationTest {
 
         assertInstanceOf(Bear.class, animalContainer.getAnimal());
         Bear bear = (Bear) animalContainer.getAnimal();
-        assertEquals(bear.getBearSequence().getName(), containsInAnyOrder("Grizzly", "Fluffy"));
+        assertThat(bear.getBearSequence().getName(), containsInAnyOrder("Grizzly", "Fluffy"));
     }
 
     @Test
